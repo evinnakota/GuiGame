@@ -7,6 +7,7 @@ public class Game {
 //        String[] suit = {"C"};
 //        int[] values = {1,2,3};
         Deck d = new Deck(rank,suit,values);
+        Player p1 = new Player("Eshu");
         System.out.println(d.isEmpty());
         d.shuffle();
         while (!d.isEmpty()) {

@@ -30,7 +30,7 @@ public class Deck {
 
     public void shuffle() {
         for (int i = 0; i < getCardsLeft(); i++) {
-            int rand = (int) (Math.random()*(getCardsLeft()-1))+1;
+            int rand = (int)(Math.random() * (i + 1));
             swap(i, rand);
         }
     }
