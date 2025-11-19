@@ -22,20 +22,20 @@ public class Card {
         return value;
     }
 
-    public void setRank(String rank) {
+    private void setRank(String rank) {
         this.rank = rank;
     }
 
-    public void setSuit(String suit) {
+    private void setSuit(String suit) {
         this.suit = suit;
     }
 
-    public void setValue(int value) {
+    private void setValue(int value) {
         this.value = value;
     }
 
     @Override
     public String toString() {
-        return this.rank + " of " + suit;
+        return this.rank + " of " + this.suit + " (worth " + this.value + ")";
     }
 }
