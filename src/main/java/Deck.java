@@ -14,22 +14,20 @@ public class Deck {
     }
 
     public boolean isEmpty() {
-        return getCardsLeft() == 0;
+        return cards.isEmpty();
     }
 
     public int getCardsLeft() {
-        return this.cards.size();
+        return cards.size();
     }
 
     public Card deal() {
         if (isEmpty()) return null;
-        Card card = cards.get(getCardsLeft()-1);
-        cards.remove(getCardsLeft()-1);
-        return card;
+        return cards.remove(cards.size() - 1);
     }
 
     public void shuffle() {
-        for (int i = 0; i < getCardsLeft(); i++) {
+        for (int i = cards.size() - 1; i > 0; i--) {
             int rand = (int)(Math.random() * (i + 1));
             swap(i, rand);
         }
@@ -39,10 +37,5 @@ public class Deck {
         Card temp = cards.get(i);
         cards.set(i, cards.get(j));
         cards.set(j, temp);
-
     }
-
-
-
-
 }
