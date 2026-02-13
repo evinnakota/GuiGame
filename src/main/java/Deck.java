@@ -2,15 +2,16 @@ import java.util.ArrayList;
 
 public class Deck {
     private final ArrayList<Card> cards = new ArrayList<>();
-
-    public Deck(String[] ranks, String[] suits, int[] values) {
+    private GameViewer window;
+    public Deck(GameViewer window, String[] ranks, String[] suits, int[] values) {
+        this.window = window;
         if (ranks.length != values.length) {
             System.out.println("CANT DO THAT!");
             return;
         }
         for (int i = 0; i < ranks.length; i++)
             for (String suit : suits)
-                cards.add(new Card(ranks[i], suit, values[i]));
+                cards.add(new Card(this.window, ranks[i], suit, values[i]));
     }
 
     public boolean isEmpty() {

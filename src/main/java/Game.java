@@ -1,31 +1,39 @@
 import java.util.Scanner;
 
 public class Game {
-    public static void main(String[] args) {
-
-        Scanner input = new Scanner(System.in);
-        // create and shuffle deck
-        String[] ranks = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-        String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
-        int[] values =  {1,2,3,4,5,6,7,8,9,10,11,12,13};
-
-        Deck deck = new Deck(ranks, suits, values);
+    private static Deck deck;
+    // private Player p1;
+    // private Player p2;
+    private boolean gameOver = false;
+    public Player p1;
+    public Player p2;
+    String[] ranks;
+    String[] suits;
+    int[] values;
+    private GameViewer window;
+    public Game() {
+        this.window = new GameViewer(this);
+        ranks = new String[]{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        suits = new String[]{"Spades", "Hearts", "Diamonds", "Clubs"};
+        values = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        deck = new Deck(this.window,this.ranks, this.suits, this.values);
         deck.shuffle();
-        System.out.println("Enter your name: ");
-        String playerName = input.nextLine();
-        System.out.println("Enter computer's name: ");
-        String compName = input.nextLine();
-        Player p1 = new Player(playerName);    // Human
-        Player p2 = new Player(compName);    // Computer
-
-        // start by dealing 3 cards each
+        p1 = new Player("");    // Human
+        p2 = new Player("");    // Computer
         for (int i = 0; i < 3; i++) {
             p1.addCard(deck.deal());
             p2.addCard(deck.deal());
         }
+    }
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
-        int round = 1;
-
+    public void endGame() {
+        gameOver = true;
+        window.repaint();
+    }
+    public static void printInstructions() {
         System.out.println("    WAR    ");
         System.out.println("You and I both hold 3 cards at a time.");
         System.out.println("Pick one each round. Higher card wins.");
@@ -34,6 +42,20 @@ public class Game {
         System.out.println("We play until no cards remain.");
         System.out.println("Good luck!");
         System.out.println();
+    }
+
+    public void playGame() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+
+        String playerName = input.nextLine();
+        System.out.println("Enter computer's name: ");
+        String compName = input.nextLine();
+        this.p1.setName(playerName);    // Human
+        this.p2.setName(compName);    // Computer
+
+        int round = 1;
+
 
         // as long as both players have cards, continue game
         while (!p1.getHand().isEmpty() && !p2.getHand().isEmpty()) {
@@ -110,6 +132,7 @@ public class Game {
 
         // game ends
         System.out.println("    GAME OVER    ");
+        endGame();
         System.out.println("Final Score " + playerName + ": " + p1.getScore() + " " + compName + ": " + p2.getScore());
 
         if (p1.getScore() > p2.getScore()) {
@@ -119,5 +142,20 @@ public class Game {
         } else {
             System.out.println("THE GAME ENDS IN A TIE.");
         }
+    }
+
+
+
+    public static void main(String[] args) {
+        // create and shuffle deck
+        Game g = new Game();
+        printInstructions();
+        g.playGame();
+
+
+
+
+
+
     }
 }
