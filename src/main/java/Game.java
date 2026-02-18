@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Game {
-    private static Deck deck;
+    private Deck deck;
     // private Player p1;
     // private Player p2;
     private boolean gameOver = false;
@@ -11,12 +11,13 @@ public class Game {
     String[] suits;
     int[] values;
     private GameViewer window;
+
     public Game() {
         this.window = new GameViewer(this);
         ranks = new String[]{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         suits = new String[]{"Spades", "Hearts", "Diamonds", "Clubs"};
         values = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-        deck = new Deck(this.window,this.ranks, this.suits, this.values);
+        deck = new Deck(this.window, this.ranks, this.suits, this.values);
         deck.shuffle();
         p1 = new Player("");    // Human
         p2 = new Player("");    // Computer
@@ -25,14 +26,19 @@ public class Game {
             p2.addCard(deck.deal());
         }
     }
+
     public boolean isGameOver() {
         return gameOver;
     }
 
     public void endGame() {
         gameOver = true;
+        // prevent card reuse
+        p1.getHand().clear();
+        p2.getHand().clear();
         window.repaint();
     }
+
     public static void printInstructions() {
         System.out.println("    WAR    ");
         System.out.println("You and I both hold 3 cards at a time.");
@@ -66,7 +72,7 @@ public class Game {
             // Player chooses which card to play
             System.out.println("Your hand:");
             for (int i = 0; i < p1.getHand().size(); i++) {
-                System.out.println((i+1) + ": " + p1.getHand().get(i));
+                System.out.println((i + 1) + ": " + p1.getHand().get(i));
             }
 
             int playerChoice;
@@ -88,7 +94,7 @@ public class Game {
             System.out.println("You played: " + c1);
 
             // ---- Computer CHOICE ----
-            int compChoice = (int)(Math.random() * p2.getHand().size());
+            int compChoice = (int) (Math.random() * p2.getHand().size());
             Card c2 = p2.getHand().get(compChoice);
             p2.getHand().remove(compChoice);
             System.out.println("                            ");
@@ -96,8 +102,8 @@ public class Game {
 
             // decide winner
             if ((c1.getValue() + c2.getValue()) > 20) {
-                p1.addScore(-1*c1.getValue());
-                p2.addScore(-1*c2.getValue());
+                p1.addScore(-1 * c1.getValue());
+                p2.addScore(-1 * c2.getValue());
             } else if (c1.getValue() > c2.getValue()) {
                 System.out.println("You win the round!");
                 p1.addScore(c1.getValue() + c2.getValue());
@@ -110,19 +116,26 @@ public class Game {
                 p2.addScore(0);
             }
 
+            window.repaint()    ;
+
             if (p1.getScore() < 0) {
                 System.out.println("You went below 0 :( " + compName + " WINS THE GAME!");
+                endGame();
                 return;
-            } else if (p2.getScore() < 0) {
+            }
+            else if (p2.getScore() < 0) {
                 System.out.println(compName + " went below 0 :( YOU WIN THE GAME!");
+                endGame();
                 return;
             }
             // draw new cards if possible
             if (!deck.isEmpty()) {
                 p1.addCard(deck.deal());
+                window.repaint();
             }
             if (!deck.isEmpty()) {
                 p2.addCard(deck.deal());
+                window.repaint();
             }
 
             System.out.println("Scores: " + playerName + ": " + p1.getScore() + " " + compName + ": " + p2.getScore());
@@ -145,16 +158,11 @@ public class Game {
     }
 
 
-
     public static void main(String[] args) {
         // create and shuffle deck
         Game g = new Game();
         printInstructions();
         g.playGame();
-
-
-
-
 
 
     }
