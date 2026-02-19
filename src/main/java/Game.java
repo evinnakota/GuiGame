@@ -5,6 +5,7 @@ public class Game {
     // private Player p1;
     // private Player p2;
     private boolean gameOver = false;
+    private boolean showingInstructions = true;
     public Player p1;
     public Player p2;
     String[] ranks;
@@ -27,8 +28,19 @@ public class Game {
         }
     }
 
+    public boolean isShowingInstructions() {
+        return showingInstructions;
+    }
+
+
+
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public void startGame() {
+        showingInstructions = false;
+        window.repaint();
     }
 
     public void endGame() {
