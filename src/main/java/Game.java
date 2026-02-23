@@ -1,7 +1,10 @@
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements MouseListener {
     private Deck deck;
+    private int clickNum;
     // private Player p1;
     // private Player p2;
     private boolean gameOver = false;
@@ -15,6 +18,7 @@ public class Game {
 
     public Game() {
         this.window = new GameViewer(this);
+        clickNum = 0;
         ranks = new String[]{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         suits = new String[]{"Spades", "Hearts", "Diamonds", "Clubs"};
         values = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
@@ -60,7 +64,6 @@ public class Game {
         System.out.println("We play until no cards remain.");
         System.out.println("Good luck!");
         System.out.println();
-        window.repaint();
     }
 
     public void playGame() {
@@ -179,6 +182,37 @@ public class Game {
         Game g = new Game();
         g.playGame();
 
+
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        window.repaint();
+
+        // For demo purposes only
+        System.out.println("mousePressed event handler executed.");
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

@@ -22,7 +22,7 @@ public class GameViewer extends JFrame {
 
 
     public void paint(Graphics g) {
-        super.paint(g); // CLEARS old drawings — REQUIRED
+        super.paint(g);
 
         // background
         g.setColor(new Color(109, 171, 100));
