@@ -51,7 +51,7 @@ public class Game {
         window.repaint();
     }
 
-    public static void printInstructions() {
+    public void printInstructions() {
         System.out.println("    WAR    ");
         System.out.println("You and I both hold 3 cards at a time.");
         System.out.println("Pick one each round. Higher card wins.");
@@ -60,9 +60,11 @@ public class Game {
         System.out.println("We play until no cards remain.");
         System.out.println("Good luck!");
         System.out.println();
+        window.repaint();
     }
 
     public void playGame() {
+        printInstructions();
         Scanner input = new Scanner(System.in);
         System.out.println("Enter your name: ");
 
@@ -73,6 +75,8 @@ public class Game {
         this.p2.setName(compName);    // Computer
 
         int round = 1;
+        showingInstructions = false;
+        window.repaint();
 
 
         // as long as both players have cards, continue game
@@ -173,7 +177,6 @@ public class Game {
     public static void main(String[] args) {
         // create and shuffle deck
         Game g = new Game();
-        printInstructions();
         g.playGame();
 
 
