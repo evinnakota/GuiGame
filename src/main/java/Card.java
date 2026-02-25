@@ -42,6 +42,7 @@ public class Card {
         return images[card];
     }
 
+    // int i is  the position index of the card in the hand.
     public void draw(Graphics g, int i) {
         if (value < 1 || value > 13) return;
         int index = 4*value - 4;
@@ -50,7 +51,18 @@ public class Card {
         if (this.suit.equals("Diamonds")) index += 3;
         if (this.suit.equals("Clubs")) index += 4;
         Image card = Card.getImage(index);
-        g.drawImage(card, X_SPACING*(i%10+1), Y_SPACING + 200*(i/10), CARD_W, CARD_H, null);
+
+        int x = X_SPACING * (i % 10 + 1);
+        int y = Y_SPACING + 200 * (i / 10);
+
+        // draw value above card
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+        g.drawString("Value: " + value, x, y - 10);
+
+        // draw card image
+
+        g.drawImage(card, x, y, CARD_W, CARD_H, null);
 
     }
 

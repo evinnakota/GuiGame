@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Game implements MouseListener {
     private Deck deck;
     private int clickNum;
-    // private Player p1;
-    // private Player p2;
     private boolean gameOver = false;
     private boolean showingInstructions = true;
     public Player p1;
@@ -15,6 +13,11 @@ public class Game implements MouseListener {
     String[] suits;
     int[] values;
     private GameViewer window;
+
+    private String message = "";
+
+    private int p1Change = 0;
+    private int p2Change = 0;
 
     public Game() {
         this.window = new GameViewer(this);
@@ -30,6 +33,22 @@ public class Game implements MouseListener {
             p1.addCard(deck.deal());
             p2.addCard(deck.deal());
         }
+    }
+
+    public int getP1Change() {
+        return p1Change;
+    }
+
+    public void setP1Change(int p1Change) {
+        this.p1Change = p1Change;
+    }
+
+    public int getP2Change() {
+        return p2Change;
+    }
+
+    public void setP2Change(int p2Change) {
+        this.p2Change = p2Change;
     }
 
     public boolean isShowingInstructions() {
