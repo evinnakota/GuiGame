@@ -2,7 +2,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Scanner;
 
-public class Game implements MouseListener {
+public class Game {
     private Deck deck;
     private int clickNum;
     private boolean gameOver = false;
@@ -33,6 +33,7 @@ public class Game implements MouseListener {
             p1.addCard(deck.deal());
             p2.addCard(deck.deal());
         }
+
     }
 
     public int getP1Change() {
@@ -220,33 +221,7 @@ public class Game implements MouseListener {
 
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
 
-        window.repaint();
 
-        // For demo purposes only
-        System.out.println("mousePressed event handler executed.");
 
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }

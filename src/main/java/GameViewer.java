@@ -55,15 +55,14 @@ public class GameViewer extends JFrame {
         g.drawString("WAR", 320, 120);
 
         g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString("You and I both hold 3 cards at a time.", 180, 200);
-        g.drawString("Pick one each round. Higher card wins.", 180, 240);
-        g.drawString("Don't get a negative score (you lose).", 180, 280);
-        g.drawString("If total value > 20, both players lose points.", 180, 320);
-        g.drawString("We play until no cards remain.", 180, 360);
-        g.drawString("Good luck!", 180, 400);
+        g.drawString("You and I both hold 3 cards at a time.", 250, 200);
+        g.drawString("Pick one each round. Higher card wins.", 250, 260);
+        g.drawString("Don't get a negative score (you lose).", 250, 320);
+        g.drawString("If total value > 20, both players lose points.", 220, 380);
+        g.drawString("We play until no cards remain.", 270, 440);
+        g.drawString("Good luck!", 350, 500);
 
         g.setFont(new Font("Arial", Font.BOLD, 22));
-        g.drawString("Continue", 260, 470);
     }
 
     private void drawGame(Graphics g) {
