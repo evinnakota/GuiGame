@@ -51,6 +51,12 @@ public class Game implements MouseListener {
         this.p2Change = p2Change;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+
+
     public boolean isShowingInstructions() {
         return showingInstructions;
     }
@@ -140,21 +146,30 @@ public class Game implements MouseListener {
 
             // decide winner
             if ((c1.getValue() + c2.getValue()) > 20) {
-                p1.addScore(-1 * c1.getValue());
-                p2.addScore(-1 * c2.getValue());
+                p1Change = -1 * c1.getValue();
+                p2Change = -1 * c2.getValue();
+                message = "Total > 20! Both lose points.";
+
             } else if (c1.getValue() > c2.getValue()) {
-                System.out.println("You win the round!");
-                p1.addScore(c1.getValue() + c2.getValue());
+                p1Change = c1.getValue() + c2.getValue();
+                p2Change = 0;
+                message = p1.getName() + " wins the round!";
+
             } else if (c2.getValue() > c1.getValue()) {
-                System.out.println(compName + " wins the round!");
-                p2.addScore(c1.getValue() + c2.getValue());
+                p1Change = 0;
+                p2Change = c1.getValue() + c2.getValue();
+                message = p2.getName() + " wins the round!";
+
             } else {
-                System.out.println("Tie! Each player gets 0 points.");
-                p1.addScore(0);
-                p2.addScore(0);
+                p1Change = 0;
+                p2Change = 0;
+                message = "Tie! No points gained.";
             }
 
-            window.repaint()    ;
+            p1.addScore(p1Change);
+            p2.addScore(p2Change);
+
+            window.repaint();
 
             if (p1.getScore() < 0) {
                 System.out.println("You went below 0 :( " + compName + " WINS THE GAME!");

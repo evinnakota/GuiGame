@@ -83,6 +83,15 @@ public class GameViewer extends JFrame {
             hand.get(i).draw(g,i);
             game.p2.getHand().get(i).draw(g,i+10);// Delete later
         }
+        // round result message
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString(game.getMessage(), 450, 367);
+
+        // score changes
+        g.setFont(new Font("Arial", Font.PLAIN, 18));
+        g.drawString("change: " + game.getP1Change(), 450, 150);
+        g.drawString("change: " + game.getP2Change(), 450, 625);
     }
 
     private void drawGameOver(Graphics g) {
