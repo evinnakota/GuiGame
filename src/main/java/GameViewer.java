@@ -94,11 +94,27 @@ public class GameViewer extends JFrame {
     }
 
     private void drawGameOver(Graphics g) {
-        g.setColor(Color.BLACK);
+        // Prints out Game Over
+        g.setColor(Color.RED);
         g.setFont(new Font("Arial", Font.BOLD, 50));
         g.drawString("GAME OVER", 200, 300);
-        g.drawString("Player 1 Score: " + game.p1.getScore(), 200, 400);
-        g.drawString("Player 2 Score: " + game.p2.getScore(), 200, 500);
+        g.setColor(Color.white);
+
+        //Depending on which player won, it indicates that player's name on top of the screen
+        // and highlights their name and score indicating that they won
+        if (game.p1.getScore()>game.p2.getScore()){
+            g.drawString(game.p1.getName() + " won!", 200, 150);
+            g.fillRect(160, 360, 490, 50);
+        }
+        else{
+            g.drawString(game.p2.getName() + " won!", 200, 150);
+            g.fillRect(160, 460, 490, 50);
+        }
+
+        //Prints out the scores after the highlight box was drawn so that way there is no overlap
+        g.setColor(Color.black);
+        g.drawString(game.p1.getName() + "'s Score: " + game.p1.getScore(), 200, 400);
+        g.drawString(game.p2.getName()+ "'s Score: " + game.p2.getScore(), 200, 500);
     }
 
 }
